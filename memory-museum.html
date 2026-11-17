@@ -1,0 +1,1151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Memory Museum | The Aaratrika Archives</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --navy: #090d20;
+    --navy-light: #141b35;
+    --gold: #d8b879;
+    --gold-light: #f1dba9;
+    --rose: #d99eac;
+    --cream: #f1e5ce;
+    --muted: #b7ad9e;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at 50% 0%, #222443 0%, transparent 55%),
+        var(--navy);
+    color: var(--cream);
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
+
+/* BACKGROUND STARS */
+
+#stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    background: #fff2ce;
+    border-radius: 50%;
+    animation: twinkle 3s infinite ease-in-out alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: .15; transform: scale(.7); }
+    to { opacity: .9; transform: scale(1.3); }
+}
+
+/* PETALS */
+
+.petal {
+    position: fixed;
+    top: -30px;
+    z-index: 2;
+    pointer-events: none;
+    color: #e8a9b8;
+    opacity: .65;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(500deg);
+        opacity: 0;
+    }
+}
+
+/* MAIN MUSEUM */
+
+.museum {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding: 65px 22px 80px;
+    text-align: center;
+    transition: opacity .6s ease, transform .6s ease;
+}
+
+.top-label {
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.museum h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 8vw, 85px);
+    font-weight: 400;
+    color: var(--gold-light);
+    line-height: 1.05;
+}
+
+.subtitle {
+    font-family: 'Great Vibes', cursive;
+    color: var(--rose);
+    font-size: clamp(25px, 4vw, 38px);
+    margin-top: 12px;
+}
+
+.introduction {
+    max-width: 550px;
+    margin: 25px auto 45px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 2;
+    font-weight: 300;
+}
+
+.ornament {
+    color: var(--gold);
+    letter-spacing: 12px;
+    font-size: 18px;
+    margin: 25px 0;
+}
+
+/* EXHIBIT GRID */
+
+.exhibit-grid {
+    width: min(1050px, 100%);
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 24px;
+}
+
+.exhibit {
+    position: relative;
+    min-height: 270px;
+    padding: 32px 23px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background:
+        linear-gradient(145deg, rgba(35, 42, 68, .9), rgba(11, 16, 35, .96));
+    border: 1px solid rgba(216, 184, 121, .38);
+    outline: 1px solid rgba(216, 184, 121, .12);
+    outline-offset: 5px;
+    cursor: pointer;
+    transition: .45s ease;
+    overflow: hidden;
+}
+
+.exhibit::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(216, 184, 121, .15);
+    pointer-events: none;
+}
+
+.exhibit:hover {
+    transform: translateY(-9px);
+    border-color: var(--gold-light);
+    box-shadow: 0 15px 45px rgba(0,0,0,.35),
+                0 0 30px rgba(216,184,121,.12);
+}
+
+.exhibit-number {
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 4px;
+    margin-bottom: 18px;
+}
+
+.exhibit-icon {
+    font-size: 39px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 12px rgba(216,184,121,.3));
+}
+
+.exhibit h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 29px;
+    font-weight: 500;
+    color: var(--gold-light);
+    margin-bottom: 12px;
+}
+
+.exhibit p {
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+    max-width: 210px;
+}
+
+.exhibit-status {
+    margin-top: 22px;
+    color: var(--rose);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.footer-note {
+    margin-top: 65px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 27px;
+    color: var(--rose);
+}
+
+/* EXHIBIT SCREEN */
+
+.exhibit-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background:
+        radial-gradient(ellipse at top, #292744 0%, transparent 55%),
+        #080c1c;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.04);
+    transition: opacity .65s ease, transform .65s ease, visibility .65s;
+}
+
+.exhibit-screen.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.exhibit-content {
+    width: min(850px, 100%);
+    margin: auto;
+    padding: 45px 25px 90px;
+    text-align: center;
+}
+
+.back-button {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid rgba(216,184,121,.5);
+    color: var(--gold-light);
+    padding: 12px 23px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.back-button:hover {
+    background: rgba(216,184,121,.12);
+}
+
+.screen-label {
+    margin-top: 65px;
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 5px;
+}
+
+.screen-title {
+    margin-top: 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(43px, 7vw, 68px);
+    font-weight: 400;
+    color: var(--gold-light);
+}
+
+.screen-subtitle {
+    font-family: 'Great Vibes', cursive;
+    font-size: 31px;
+    color: var(--rose);
+    margin-top: 10px;
+}
+
+.gold-line {
+    width: 90px;
+    height: 1px;
+    background: var(--gold);
+    margin: 30px auto;
+}
+
+/* STORY CARDS */
+
+.story-card {
+    margin: 35px auto;
+    padding: 35px 30px;
+    background: linear-gradient(135deg, rgba(244,228,201,.08), rgba(244,228,201,.025));
+    border: 1px solid rgba(216,184,121,.35);
+    position: relative;
+    text-align: left;
+}
+
+.story-card::before {
+    content: "✦";
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    background: #11152b;
+    padding: 0 12px;
+}
+
+.story-card h3 {
+    text-align: center;
+    color: var(--gold-light);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.story-card p {
+    color: #d4c9b8;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.story-number {
+    color: var(--gold);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+/* TIMELINE */
+
+.timeline {
+    position: relative;
+    margin: 50px auto;
+    max-width: 570px;
+    text-align: left;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 13px;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background: linear-gradient(var(--gold), var(--rose), transparent);
+}
+
+.timeline-item {
+    position: relative;
+    padding: 0 0 42px 48px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 7px;
+    top: 5px;
+    width: 13px;
+    height: 13px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(216,184,121,.6);
+}
+
+.timeline-item h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    color: var(--gold-light);
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.timeline-item p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 2;
+}
+
+.timeline-date {
+    font-size: 9px;
+    color: var(--rose);
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+/* MIDNIGHT CLOCK */
+
+.midnight-section {
+    margin: 65px auto;
+    padding: 45px 20px;
+    border: 1px solid rgba(216,184,121,.3);
+    background: radial-gradient(ellipse, rgba(47,48,82,.65), rgba(8,12,28,.9));
+}
+
+.midnight-section > p {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 2;
+}
+
+.clock-button {
+    margin: 30px auto 15px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    background: radial-gradient(circle, #252744, #0b1024);
+    color: var(--gold-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 0 35px rgba(216,184,121,.12);
+    transition: .4s;
+}
+
+.clock-button:hover {
+    box-shadow: 0 0 55px rgba(216,184,121,.3);
+    transform: scale(1.04);
+}
+
+.clock-time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 43px;
+}
+
+.clock-date {
+    font-size: 9px;
+    letter-spacing: 3px;
+    margin-top: 7px;
+    color: var(--rose);
+}
+
+.clock-instruction {
+    color: var(--gold);
+    font-size: 9px;
+    letter-spacing: 2px;
+    margin-top: 20px;
+}
+
+.confession {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 1.2s ease, opacity 1s ease;
+}
+
+.confession.revealed {
+    max-height: 550px;
+    opacity: 1;
+}
+
+.confession-inner {
+    padding: 30px 10px 0;
+}
+
+.confession-inner h3 {
+    font-family: 'Great Vibes', cursive;
+    color: var(--rose);
+    font-size: 37px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.confession-inner p {
+    max-width: 480px;
+    margin: auto;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 23px;
+    line-height: 1.7;
+    color: var(--cream);
+}
+
+/* FINAL INSCRIPTION */
+
+.final-inscription {
+    margin: 70px auto 40px;
+    padding: 35px 25px;
+    border-top: 1px solid rgba(216,184,121,.4);
+    border-bottom: 1px solid rgba(216,184,121,.4);
+}
+
+.final-inscription p {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--gold-light);
+    font-size: clamp(23px, 4vw, 31px);
+    line-height: 1.7;
+}
+
+.final-inscription span {
+    display: block;
+    margin-top: 20px;
+    font-family: 'Great Vibes', cursive;
+    color: var(--rose);
+    font-size: 27px;
+}
+
+/* PLACEHOLDER EXHIBITS */
+
+.placeholder-box {
+    margin: 70px auto;
+    padding: 65px 25px;
+    border: 1px solid rgba(216,184,121,.3);
+    background: rgba(255,255,255,.025);
+}
+
+.placeholder-box .big-icon {
+    font-size: 55px;
+    margin-bottom: 25px;
+}
+
+.placeholder-box h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    color: var(--gold-light);
+    font-weight: 400;
+}
+
+.placeholder-box p {
+    max-width: 420px;
+    margin: 15px auto 0;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 2;
+}
+
+/* TRANSITION */
+
+body.transitioning .museum {
+    opacity: 0;
+    transform: scale(.97);
+}
+
+@media(max-width:600px) {
+    .museum {
+        padding: 50px 20px 60px;
+    }
+
+    .exhibit-grid {
+        grid-template-columns: 1fr;
+        max-width: 370px;
+    }
+
+    .exhibit {
+        min-height: 245px;
+    }
+
+    .exhibit-content {
+        padding: 25px 18px 70px;
+    }
+
+    .story-card {
+        padding: 30px 19px;
+    }
+
+    .story-card p {
+        font-size: 19px;
+    }
+
+    .timeline-item p {
+        font-size: 11px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="stars"></div>
+
+<!-- MUSEUM ENTRANCE -->
+
+<main class="museum" id="museum">
+
+    <div class="top-label">THE AARATRIKA ARCHIVES · COLLECTION 001</div>
+
+    <h1>The Memory Museum</h1>
+
+    <div class="subtitle">A gallery of everything worth remembering.</div>
+
+    <div class="ornament">✦ ❧ ✦</div>
+
+    <p class="introduction">
+        Every photograph holds a moment.
+        Every little detail carries a story.
+        And every story deserves a place where it can live forever.
+        <br><br>
+        Welcome to a collection of memories, little treasures,
+        and chapters that are still being written.
+    </p>
+
+    <div class="exhibit-grid">
+
+        <div class="exhibit" onclick="openExhibit(1)">
+            <div class="exhibit-number">EXHIBIT Nº 01</div>
+            <div class="exhibit-icon">🖍️</div>
+            <h2>The First Encounter</h2>
+            <p>Where a little classroom, a handful of crayons, and two children began a story.</p>
+            <div class="exhibit-status">Enter the exhibit ✦</div>
+        </div>
+
+        <div class="exhibit" onclick="openExhibit(2)">
+            <div class="exhibit-number">EXHIBIT Nº 02</div>
+            <div class="exhibit-icon">📷</div>
+            <h2>The Photograph Gallery</h2>
+            <p>Little frozen moments that deserve to last forever.</p>
+            <div class="exhibit-status">Awaiting photographs</div>
+        </div>
+
+        <div class="exhibit" onclick="openExhibit(3)">
+            <div class="exhibit-number">EXHIBIT Nº 03</div>
+            <div class="exhibit-icon">💌</div>
+            <h2>The Little Things</h2>
+            <p>Inside jokes, conversations, messages, and the smallest details.</p>
+            <div class="exhibit-status">Awaiting memories</div>
+        </div>
+
+        <div class="exhibit" onclick="openExhibit(4)">
+            <div class="exhibit-number">EXHIBIT Nº 04</div>
+            <div class="exhibit-icon">🌹</div>
+            <h2>The Portrait of Her</h2>
+            <p>An entire collection dedicated to one wonderfully unique person.</p>
+            <div class="exhibit-status">Awaiting its portrait</div>
+        </div>
+
+        <div class="exhibit" onclick="openExhibit(5)">
+            <div class="exhibit-number">EXHIBIT Nº 05</div>
+            <div class="exhibit-icon">🌌</div>
+            <h2>The Unwritten Chapters</h2>
+            <p>Places to go, things to experience, and memories yet to be made.</p>
+            <div class="exhibit-status">The future awaits</div>
+        </div>
+
+    </div>
+
+    <div class="footer-note">
+        Some things are too precious to be forgotten.
+    </div>
+
+</main>
+
+
+<!-- EXHIBIT DISPLAY SCREEN -->
+
+<section class="exhibit-screen" id="exhibitScreen">
+
+    <div class="exhibit-content">
+
+        <button class="back-button" onclick="closeExhibit()">
+            ← RETURN TO THE MUSEUM
+        </button>
+
+        <div id="exhibitBody"></div>
+
+        <div style="margin-top:60px;">
+            <button class="back-button" onclick="closeExhibit()">
+                RETURN TO THE MUSEUM ✦
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* CREATE STARS */
+
+const starContainer = document.getElementById("stars");
+
+for(let i = 0; i < 95; i++) {
+
+    const star = document.createElement("div");
+    star.className = "star";
+
+    const size = Math.random() * 3 + 1;
+
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.animationDelay = Math.random() * 4 + "s";
+    star.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+    starContainer.appendChild(star);
+}
+
+
+/* FALLING CHERRY BLOSSOMS */
+
+function createPetal() {
+
+    const petal = document.createElement("div");
+    petal.className = "petal";
+    petal.innerHTML = "✿";
+
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.fontSize = (Math.random() * 12 + 9) + "px";
+    petal.style.animationDuration = (Math.random() * 7 + 8) + "s";
+
+    document.body.appendChild(petal);
+
+    setTimeout(() => {
+        petal.remove();
+    }, 16000);
+}
+
+setInterval(createPetal, 900);
+
+
+/* EXHIBIT CONTENT */
+
+const exhibitBody = document.getElementById("exhibitBody");
+const exhibitScreen = document.getElementById("exhibitScreen");
+const museum = document.getElementById("museum");
+
+
+function openExhibit(number) {
+
+    document.body.classList.add("transitioning");
+
+    setTimeout(() => {
+
+        museum.style.visibility = "hidden";
+
+        exhibitScreen.scrollTop = 0;
+        exhibitBody.innerHTML = "";
+
+        if(number === 1) {
+            exhibitBody.innerHTML = firstEncounter;
+        }
+
+        else {
+            exhibitBody.innerHTML = placeholders[number];
+        }
+
+        exhibitScreen.classList.add("active");
+        document.body.classList.remove("transitioning");
+
+    }, 550);
+
+}
+
+
+function closeExhibit() {
+
+    exhibitScreen.classList.remove("active");
+
+    setTimeout(() => {
+
+        museum.style.visibility = "visible";
+        exhibitScreen.scrollTop = 0;
+
+    }, 650);
+
+}
+
+
+/* EXHIBIT 01 */
+
+const firstEncounter = `
+
+<div class="screen-label">EXHIBIT Nº 01 · THE BEGINNING</div>
+
+<h1 class="screen-title">The First Encounter</h1>
+
+<div class="screen-subtitle">Some stories begin long before we realise it.</div>
+
+<div class="gold-line"></div>
+
+
+<div class="story-card">
+
+    <div class="story-number">CHAPTER I · AGE FOUR</div>
+
+    <h3>Some Stories Begin With Crayons</h3>
+
+    <p>
+        We were only four when our story began.
+        You sat at the desk ahead of mine while I scribbled
+        colours onto a drawing.
+        Sometimes, my hand would accidentally bump into you.
+        <br><br>
+        I remember other children snatching away my crayons, too.
+        But you noticed.
+        You stood up for me, got them back, and returned to your desk.
+        <br><br>
+        Neither of us knew it then, but that little classroom
+        was where everything began.
+    </p>
+
+</div>
+
+
+<div class="gold-line"></div>
+
+<div class="screen-label">THE YEARS THAT FOLLOWED</div>
+
+<h2 class="screen-title" style="font-size:42px;">
+    A Story Still Unfolding
+</h2>
+
+<div class="timeline">
+
+    <div class="timeline-item">
+
+        <div class="timeline-dot"></div>
+
+        <div class="timeline-date">Age Four</div>
+
+        <h3>The Crayons</h3>
+
+        <p>
+            A classroom, a drawing, and a little girl who
+            stood up for a little boy.
+        </p>
+
+    </div>
+
+
+    <div class="timeline-item">
+
+        <div class="timeline-dot"></div>
+
+        <div class="timeline-date">The Childhood Years</div>
+
+        <h3>Best Friends</h3>
+
+        <p>
+            We grew up, made memories, and remained best friends
+            for years.
+        </p>
+
+    </div>
+
+
+    <div class="timeline-item">
+
+        <div class="timeline-dot"></div>
+
+        <div class="timeline-date">One Year Apart</div>
+
+        <h3>A Little Distance</h3>
+
+        <p>
+            There was a year when we lost contact.
+            But that wasn't the end of our story.
+        </p>
+
+    </div>
+
+
+    <div class="timeline-item">
+
+        <div class="timeline-dot"></div>
+
+        <div class="timeline-date">Thirteen Years Later</div>
+
+        <h3>Something More</h3>
+
+        <p>
+            We started talking more and more, often staying up
+            late into the night.
+            Somewhere along the way, friendship began to feel
+            like something more.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="midnight-section">
+
+    <div class="screen-label" style="margin-top:0;">
+        A NIGHT WORTH REMEMBERING
+    </div>
+
+    <h2 class="screen-title" style="font-size:38px;">
+        5th April
+    </h2>
+
+    <p>
+        One conversation. Two confessions.
+        A moment that changed the meaning of everything.
+    </p>
+
+
+    <button class="clock-button" id="clockButton" onclick="revealConfession()">
+
+        <span class="clock-time">02:23</span>
+
+        <span class="clock-date">5 APRIL</span>
+
+    </button>
+
+    <div class="clock-instruction" id="clockInstruction">
+        ✦ CLICK THE CLOCK TO REVISIT THAT NIGHT ✦
+    </div>
+
+
+    <div class="confession" id="confession">
+
+        <div class="confession-inner">
+
+            <h3>And then, at 02:48 AM...</h3>
+
+            <p>
+                I was scared to confess what I felt.
+                So I spoke about it indirectly, hoping you would understand.
+                <br><br>
+                And you did.
+                <br><br>
+                You told me you liked me too.
+                <br><br>
+                Thirteen years of friendship, and suddenly,
+                we were beginning a new chapter.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="final-inscription">
+
+    <p>
+  Perhaps the most beautiful part of our story is that
+
+I didn't have to meet a stranger to find someone special.
+
+I found someone special in a person I'd known almost my entire life."
+
+</p>
+
+<span>And our story continues...</span>
+
+</div>
+
+/* OTHER EXHIBITS: TEMPORARY DISPLAYS */
+
+const placeholders = {
+
+2:`
+
+<div class="screen-label">EXHIBIT N° 02</div>
+
+<h1 class="screen-title">The Photograph Gallery</
+
+h1>
+
+<div class="screen-subtitle">A thousand moments,
+
+frozen in time.</div>
+
+<div class="gold-line"></div>
+
+<div class="placeholder-box">
+
+<div class="big-icon"></div>
+
+<h3>A Gallery Waiting to Be Filled</h3>
+
+<p>
+
+Every photograph has a story.
+
+This room is waiting for the moments you want to preserve here.
+
+</p>
+
+</div>
+3:`
+
+<div class="screen-label">EXHIBIT N° 03</div>
+
+<h1 class="screen-title">The Little Things</h1>
+
+<div class="screen-subtitle">The details that make a
+
+story yours.</div>
+
+<div class="gold-line"></div>
+
+<div class="placeholder-box">
+
+<div class="big-icon"></div>
+
+<h3>The Little Treasures</h3>
+
+<p>
+
+Inside jokes, messages, silly conversations, and all those little things that deserve their own place in history.
+
+</p>
+
+</div>
+
+4:
+
+<div class="screen-label">EXHIBIT N° 04</div>
+
+<h1 class="screen-title">The Portrait of Her</h1>
+
+<div class="screen-subtitle">An entire exhibit for one
+
+person.</div>
+
+<div class="gold-line"></div>
+
+<div class="placeholder-box">
+
+<div class="big-icon"></div>
+
+<h3>A Portrait Unlike Any Other</h3>
+
+<p>
+
+Her little habits, favourite things, quirks, expressions, and all the details that make her who she is.
+
+</p>
+
+</div>
+
+5:
+
+<div class="screen-labe EXHIBIT N° 05</div>
+
+<h1 class="screen-title">The Unwritten Chapters</
+5:`
+
+<div class="screen-label">EXHIBIT N° 05</div>
+
+<h1 class="screen-title">The Unwritten Chapters</
+
+h1>
+
+<div class="screen-subtitle">The best stories are still
+
+ahead.</div>
+
+<div class="gold-line"></div>
+
+<div class="placeholder-box">
+
+<div class="big-icon"> </div>
+
+<h3>To Be Continued...</h3>
+
+<p>
+
+Places waiting to be explored.
+
+Experiences waiting to happen.
+
+Memories that haven't been made yet.
+
+This chapter is still being written.
+
+</p>
+
+</div>
+
+};
+
+/* CONFESSION REVEAL */
+
+function reveal Confession() {
+
+const confession =
+
+document.getElementById("confession");
+
+const clockButton =
+
+document.getElementById("clockButton");
+
+const instruction =
+
+document.getElementById("clockInstruction");
+
+if (confession.classList.contains("revealed")) {
+
+}
+
+return;
+
+clockButton.innerHTMLO
+
+<span class="clock-time">02:48</span>
+  clockButton.innerHTML = `
+
+<span class="clock-time">02:48</span>
+
+<span class="clock-date">5 APRIL</span>
+
+clockButton.style.borderColor = "#f1dba9";
+
+clockButton.style.boxShadow = "0 0 55px rgba(216,184,121,.4)";
+
+instruction.innerHTML = THE MOMENT EVERYTHING CHANGED
+
+confession.classList.add("revealed");
+
+for(let i = 0; i < 18; i++) {
+
+setTimeout(createPetal, i * 120);
+
+}
+
+}
+
+/* ESCAPE KEY */
+
+document.addEventListener("keydown", function(event) {
+
+if(event.key === "Escape" &&
+
+exhibitScreen.classList.contains("active")) {
+
+closeExhibit();
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>
