@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Aaratrika Archives</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse at 50% 45%, #29204b 0%, #151128 48%, #080711 100%);
+    color: #fff5e9;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* Main entrance */
+
+.entrance {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Stars */
+
+#starfield,
+#petalfield {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: #fff9e9;
+    box-shadow: 0 0 8px #fff9e9;
+    animation: twinkle var(--duration) infinite ease-in-out;
+    animation-delay: var(--delay);
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.7); }
+    50% { opacity: 1; transform: scale(1.5); }
+}
+
+/* Shooting stars */
+
+.shooting-star {
+    position: absolute;
+    width: 110px;
+    height: 1px;
+    background: linear-gradient(90deg, #ffffff, transparent);
+    opacity: 0;
+    transform: rotate(-35deg);
+    animation: shooting 5s linear infinite;
+}
+
+.shooting-star:nth-child(1) {
+    top: 20%;
+    left: 75%;
+    animation-delay: 1s;
+}
+
+.shooting-star:nth-child(2) {
+    top: 55%;
+    left: 15%;
+    animation-delay: 4s;
+}
+
+.shooting-star:nth-child(3) {
+    top: 35%;
+    left: 90%;
+    animation-delay: 7s;
+}
+
+@keyframes shooting {
+    0% { opacity: 0; transform: translate(0, 0) rotate(-35deg); }
+    5% { opacity: 1; }
+    20% { opacity: 0; transform: translate(-220px, 150px) rotate(-35deg); }
+    100% { opacity: 0; }
+}
+
+/* Cherry blossom petals */
+
+.petal {
+    position: absolute;
+    top: -30px;
+    font-size: 15px;
+    opacity: 0.75;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-30px) rotate(0deg) translateX(0);
+        opacity: 0;
+    }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.7; }
+    100% {
+        transform: translateY(110vh) rotate(360deg) translateX(90px);
+        opacity: 0;
+    }
+}
+
+/* Moon */
+
+.moon {
+    position: absolute;
+    top: 9%;
+    right: 12%;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background: #fff1d1;
+    box-shadow:
+        0 0 25px rgba(255, 241, 209, 0.5),
+        0 0 75px rgba(255, 241, 209, 0.18);
+    opacity: 0;
+    animation: moonAppear 2s ease forwards 1s;
+}
+
+@keyframes moonAppear {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 0.9; transform: translateY(0); }
+}
+
+/* Main text */
+
+.content {
+    position: relative;
+    z-index: 5;
+    width: min(90%, 850px);
+    padding: 30px 15px;
+}
+
+.eyebrow {
+    color: #e7c99b;
+    font-size: 15px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    opacity: 0;
+    animation: fadeUp 1.5s ease forwards 1.5s;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 7vw, 76px);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 1px;
+    color: #fff3df;
+    text-shadow: 0 0 30px rgba(238, 205, 160, 0.2);
+    opacity: 0;
+    animation: fadeUp 2s ease forwards 2s;
+}
+
+.intro {
+    max-width: 650px;
+    margin: 30px auto 40px;
+    color: #d8cce0;
+    font-size: clamp(19px, 3vw, 25px);
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 2s ease forwards 3s;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 17px;
+    opacity: 0;
+    animation: fadeUp 1.5s ease forwards 4s;
+}
+
+button {
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.enter-btn {
+    padding: 13px 35px;
+    border: 1px solid #d9b77e;
+    background: rgba(217, 183, 126, 0.08);
+    color: #f5dfb9;
+    border-radius: 30px;
+}
+
+.enter-btn:hover {
+    background: #d9b77e;
+    color: #171020;
+    box-shadow: 0 0 25px rgba(217, 183, 126, 0.35);
+    transform: translateY(-3px);
+}
+
+.music-btn {
+    background: transparent;
+    border: none;
+    color: #c9b9d7;
+    font-size: 16px;
+}
+
+.music-btn:hover {
+    color: #fff0cf;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Transition overlay */
+
+.transition {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    background: #090714;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.5s ease;
+}
+
+.transition.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.footer {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #8d819f;
+    font-size: 14px;
+    letter-spacing: 2px;
+    z-index: 5;
+}
+
+@media (max-width: 600px) {
+    .moon {
+        width: 48px;
+        height: 48px;
+        top: 7%;
+        right: 8%;
+    }
+
+    .eyebrow {
+        letter-spacing: 3px;
+        font-size: 12px;
+    }
+
+    .intro {
+        margin: 24px auto 32px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main class="entrance">
+
+    <div id="starfield"></div>
+    <div id="petalfield"></div>
+
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+
+    <div class="moon"></div>
+
+    <div class="content">
+
+        <p class="eyebrow">A little universe, made for you</p>
+
+        <h1>The Aaratrika Archives</h1>
+
+        <p class="intro">
+            Somewhere in this endless universe, a little heart
+            put together a little world, hoping to make you feel
+            as special as you truly are.
+        </p>
+
+        <div class="buttons">
+
+            <button class="enter-btn" onclick="enterArchives()">
+                Enter the Archives ✧
+            </button>
+
+            <button class="music-btn" onclick="toggleMusic()" id="musicButton">
+                Ek dhun, aapke kaano ke liye..
+            </button>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        MADE WITH LOVE · 18 NOVEMBER
+    </div>
+
+</main>
+
+<div class="transition" id="transition"></div>
+
+<audio id="backgroundMusic" loop>
+    <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* Generate stars */
+
+const starfield = document.getElementById("starfield");
+
+for (let i = 0; i < 150; i++) {
+    const star = document.createElement("div");
+
+    star.className = "star";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.setProperty("--duration", (2 + Math.random() * 4) + "s");
+    star.style.setProperty("--delay", Math.random() * 5 + "s");
+
+    starfield.appendChild(star);
+}
+
+/* Generate falling petals */
+
+const petalfield = document.getElementById("petalfield");
+
+for (let i = 0; i < 22; i++) {
+    const petal = document.createElement("div");
+
+    petal.className = "petal";
+    petal.textContent = "🌸";
+    petal.style.left = Math.random() * 100 + "%";
+    petal.style.animationDuration = (8 + Math.random() * 12) + "s";
+    petal.style.animationDelay = Math.random() * 10 + "s";
+    petal.style.fontSize = (10 + Math.random() * 12) + "px";
+
+    petalfield.appendChild(petal);
+}
+
+/* Music button */
+
+const music = document.getElementById("backgroundMusic");
+const musicButton = document.getElementById("musicButton");
+
+let isPlaying = false;
+
+async function toggleMusic() {
+
+    if (!isPlaying) {
+        try {
+            await music.play();
+            isPlaying = true;
+            musicButton.textContent = "Pause the melody ♪";
+        } catch (error) {
+            musicButton.textContent = "Add your music to assets/music.mp3";
+        }
+    } else {
+        music.pause();
+        isPlaying = false;
+        musicButton.textContent = "Ek dhun, aapke kaano ke liye..";
+    }
+}
+
+/* Enter transition */
+
+function enterArchives() {
+    const overlay = document.getElementById("transition");
+
+    overlay.classList.add("active");
+
+    setTimeout(() => {
+        window.location.href = "birthday-hall.html";
+    }, 1600);
+}
+
+</script>
+
+</body>
+</html>
