@@ -945,207 +945,136 @@ const firstEncounter = `
 <div class="final-inscription">
 
     <p>
-  Perhaps the most beautiful part of our story is that
+                "Perhaps the most beautiful part of our story is that
+        I didn't have to meet a stranger to find someone special.
+        I found someone special in a person I'd known
+        almost my entire life."
+    </p>
 
-I didn't have to meet a stranger to find someone special.
-
-I found someone special in a person I'd known almost my entire life."
-
-</p>
-
-<span>And our story continues...</span>
+    <span>And our story continues...</span>
 
 </div>
+
+`;
+
 
 /* OTHER EXHIBITS: TEMPORARY DISPLAYS */
 
 const placeholders = {
 
-2:`
+2: `
+    <div class="screen-label">EXHIBIT Nº 02</div>
+    <h1 class="screen-title">The Photograph Gallery</h1>
+    <div class="screen-subtitle">A thousand moments, frozen in time.</div>
+    <div class="gold-line"></div>
+    <div class="placeholder-box">
+        <div class="big-icon">📷</div>
+        <h3>A Gallery Waiting to Be Filled</h3>
+        <p>
+            Every photograph has a story.
+            This room is waiting for the moments
+            you want to preserve here.
+        </p>
+    </div>
+`,
 
-<div class="screen-label">EXHIBIT N° 02</div>
+3: `
+    <div class="screen-label">EXHIBIT Nº 03</div>
+    <h1 class="screen-title">The Little Things</h1>
+    <div class="screen-subtitle">The details that make a story yours.</div>
+    <div class="gold-line"></div>
+    <div class="placeholder-box">
+        <div class="big-icon">💌</div>
+        <h3>The Little Treasures</h3>
+        <p>
+            Inside jokes, messages, silly conversations,
+            and all those little things that deserve
+            their own place in history.
+        </p>
+    </div>
+`,
 
-<h1 class="screen-title">The Photograph Gallery</
+4: `
+    <div class="screen-label">EXHIBIT Nº 04</div>
+    <h1 class="screen-title">The Portrait of Her</h1>
+    <div class="screen-subtitle">An entire exhibit for one person.</div>
+    <div class="gold-line"></div>
+    <div class="placeholder-box">
+        <div class="big-icon">🌹</div>
+        <h3>A Portrait Unlike Any Other</h3>
+        <p>
+            Her little habits, favourite things,
+            quirks, expressions, and all the details
+            that make her who she is.
+        </p>
+    </div>
+`,
 
-h1>
-
-<div class="screen-subtitle">A thousand moments,
-
-frozen in time.</div>
-
-<div class="gold-line"></div>
-
-<div class="placeholder-box">
-
-<div class="big-icon"></div>
-
-<h3>A Gallery Waiting to Be Filled</h3>
-
-<p>
-
-Every photograph has a story.
-
-This room is waiting for the moments you want to preserve here.
-
-</p>
-
-</div>
-3:`
-
-<div class="screen-label">EXHIBIT N° 03</div>
-
-<h1 class="screen-title">The Little Things</h1>
-
-<div class="screen-subtitle">The details that make a
-
-story yours.</div>
-
-<div class="gold-line"></div>
-
-<div class="placeholder-box">
-
-<div class="big-icon"></div>
-
-<h3>The Little Treasures</h3>
-
-<p>
-
-Inside jokes, messages, silly conversations, and all those little things that deserve their own place in history.
-
-</p>
-
-</div>
-
-4:
-
-<div class="screen-label">EXHIBIT N° 04</div>
-
-<h1 class="screen-title">The Portrait of Her</h1>
-
-<div class="screen-subtitle">An entire exhibit for one
-
-person.</div>
-
-<div class="gold-line"></div>
-
-<div class="placeholder-box">
-
-<div class="big-icon"></div>
-
-<h3>A Portrait Unlike Any Other</h3>
-
-<p>
-
-Her little habits, favourite things, quirks, expressions, and all the details that make her who she is.
-
-</p>
-
-</div>
-
-5:
-
-<div class="screen-labe EXHIBIT N° 05</div>
-
-<h1 class="screen-title">The Unwritten Chapters</
-5:`
-
-<div class="screen-label">EXHIBIT N° 05</div>
-
-<h1 class="screen-title">The Unwritten Chapters</
-
-h1>
-
-<div class="screen-subtitle">The best stories are still
-
-ahead.</div>
-
-<div class="gold-line"></div>
-
-<div class="placeholder-box">
-
-<div class="big-icon"> </div>
-
-<h3>To Be Continued...</h3>
-
-<p>
-
-Places waiting to be explored.
-
-Experiences waiting to happen.
-
-Memories that haven't been made yet.
-
-This chapter is still being written.
-
-</p>
-
-</div>
+5: `
+    <div class="screen-label">EXHIBIT Nº 05</div>
+    <h1 class="screen-title">The Unwritten Chapters</h1>
+    <div class="screen-subtitle">The best stories are still ahead.</div>
+    <div class="gold-line"></div>
+    <div class="placeholder-box">
+        <div class="big-icon">🌌</div>
+        <h3>To Be Continued...</h3>
+        <p>
+            Places waiting to be explored.
+            Experiences waiting to happen.
+            Memories that haven't been made yet.
+            This chapter is still being written.
+        </p>
+    </div>
+`
 
 };
 
+
 /* CONFESSION REVEAL */
 
-function reveal Confession() {
+function revealConfession() {
 
-const confession =
+    const confession = document.getElementById("confession");
+    const clockButton = document.getElementById("clockButton");
+    const instruction = document.getElementById("clockInstruction");
 
-document.getElementById("confession");
+    if(confession.classList.contains("revealed")) {
+        return;
+    }
 
-const clockButton =
+    clockButton.innerHTML = `
+        <span class="clock-time">02:48</span>
+        <span class="clock-date">5 APRIL</span>
+    `;
 
-document.getElementById("clockButton");
+    clockButton.style.borderColor = "#f1dba9";
+    clockButton.style.boxShadow = "0 0 55px rgba(216,184,121,.4)";
 
-const instruction =
+    instruction.innerHTML = "✦ THE MOMENT EVERYTHING CHANGED ✦";
 
-document.getElementById("clockInstruction");
+    confession.classList.add("revealed");
 
-if (confession.classList.contains("revealed")) {
-
-}
-
-return;
-
-clockButton.innerHTMLO
-
-<span class="clock-time">02:48</span>
-  clockButton.innerHTML = `
-
-<span class="clock-time">02:48</span>
-
-<span class="clock-date">5 APRIL</span>
-
-clockButton.style.borderColor = "#f1dba9";
-
-clockButton.style.boxShadow = "0 0 55px rgba(216,184,121,.4)";
-
-instruction.innerHTML = THE MOMENT EVERYTHING CHANGED
-
-confession.classList.add("revealed");
-
-for(let i = 0; i < 18; i++) {
-
-setTimeout(createPetal, i * 120);
+    for(let i = 0; i < 18; i++) {
+        setTimeout(createPetal, i * 120);
+    }
 
 }
 
-}
 
 /* ESCAPE KEY */
 
 document.addEventListener("keydown", function(event) {
 
-if(event.key === "Escape" &&
+    if(event.key === "Escape" &&
+       exhibitScreen.classList.contains("active")) {
 
-exhibitScreen.classList.contains("active")) {
+        closeExhibit();
 
-closeExhibit();
-
-}
+    }
 
 });
 
 </script>
 
 </body>
-
 </html>
