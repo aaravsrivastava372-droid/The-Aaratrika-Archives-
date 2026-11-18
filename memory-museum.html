@@ -709,6 +709,204 @@ body.transitioning .museum {
     }
     }
     
+/* =====================================
+   EXHIBIT 03 — THE LITTLE THINGS
+===================================== */
+
+.little-things-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1100px;
+    margin: 45px auto;
+    padding: 20px;
+}
+
+.memory-card {
+    position: relative;
+    background: linear-gradient(145deg, #e8d4a8, #b18a50);
+    padding: 10px;
+    border: 2px solid #e8c77f;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+    cursor: pointer;
+    transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.memory-card:hover {
+    transform: translateY(-7px) rotate(-1deg);
+    box-shadow: 0 12px 30px rgba(224,180,95,0.35);
+}
+
+.memory-card img {
+    width: 100%;
+    height: 175px;
+    object-fit: cover;
+    display: block;
+    border: 3px solid #3b291d;
+}
+
+.memory-card .memory-number {
+    color: #8d6838;
+    font-family: Georgia, serif;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 10px;
+    letter-spacing: 2px;
+}
+
+.memory-card h3 {
+    color: #382719;
+    font-family: Georgia, serif;
+    text-align: center;
+    font-size: 17px;
+    margin: 7px 2px 5px;
+}
+
+.memory-card .memory-category {
+    color: #75552e;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+}
+
+.memory-collection-heading {
+    grid-column: 1 / -1;
+    color: #e8d2a4;
+    font-family: Georgia, serif;
+    font-size: 23px;
+    text-align: center;
+    margin: 35px 0 5px;
+    letter-spacing: 1px;
+}
+
+.memory-collection-description {
+    grid-column: 1 / -1;
+    color: #c8b58e;
+    text-align: center;
+    font-family: Georgia, serif;
+    font-style: italic;
+    margin-bottom: 8px;
+}
+
+/* Individual memory viewer */
+
+.little-memory-viewer {
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    background: rgba(5, 8, 24, 0.98);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.45s, visibility 0.45s;
+    overflow-y: auto;
+}
+
+.little-memory-viewer.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.little-memory-paper {
+    width: min(750px, 95%);
+    background: linear-gradient(145deg, #f3e4c2, #d9bd87);
+    border: 7px double #9b7139;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 0 45px rgba(218,174,91,0.25);
+    animation: memoryAppear 0.6s ease;
+}
+
+@keyframes memoryAppear {
+    from {
+        transform: translateY(25px) scale(0.96);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.little-memory-paper h2 {
+    color: #49321f;
+    font-family: Georgia, serif;
+    font-size: 27px;
+    margin: 5px 0 18px;
+}
+
+.little-memory-paper img {
+    max-width: 100%;
+    max-height: 55vh;
+    object-fit: contain;
+    border: 4px solid #9b7139;
+    display: block;
+    margin: 0 auto;
+}
+
+.little-memory-paper p {
+    color: #5d422b;
+    font-family: Georgia, serif;
+    font-size: 17px;
+    line-height: 1.7;
+    margin-top: 18px;
+}
+
+.little-memory-paper .memory-date {
+    color: #947344;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-top: 15px;
+}
+
+.little-memory-close {
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    border: 1px solid #d5ad65;
+    background: transparent;
+    color: #f1d9a5;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    .little-things-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        padding: 10px;
+    }
+
+    .memory-card img {
+        height: 145px;
+    }
+
+    .memory-card h3 {
+        font-size: 14px;
+    }
+
+    .memory-collection-heading {
+        font-size: 20px;
+    }
+
+    .little-memory-paper {
+        padding: 15px;
+    }
+
+    .little-memory-paper h2 {
+        font-size: 22px;
+    }
+}
+    
 </style>
 </head>
 
@@ -1153,21 +1351,142 @@ const placeholders = {
 `,
     
 
+
 3: `
-    <div class="screen-label">EXHIBIT Nº 03</div>
-    <h1 class="screen-title">The Little Things</h1>
-    <div class="screen-subtitle">The details that make a story yours.</div>
-    <div class="gold-line"></div>
-    <div class="placeholder-box">
-        <div class="big-icon">💌</div>
-        <h3>The Little Treasures</h3>
-        <p>
-            Inside jokes, messages, silly conversations,
-            and all those little things that deserve
-            their own place in history.
+    <h1>The Little Things</h1>
+
+    <p class="exhibit-subtitle">
+        The moments that nobody else would understand.
+    </p>
+
+    <div class="little-things-gallery">
+
+        <h2 class="memory-collection-heading">
+            I. The Conversations
+        </h2>
+
+        <p class="memory-collection-description">
+            Somewhere between a hello and a thousand messages.
         </p>
+
+        <div class="memory-card" onclick="openLittleThing(1)">
+            <img src="memory1.jpg" alt="Memory 1">
+            <div class="memory-number">ARCHIVE 001</div>
+            <h3>One Little Conversation</h3>
+            <div class="memory-category">The Conversations</div>
+        </div>
+
+        <div class="memory-card" onclick="openLittleThing(2)">
+            <img src="memory2.jpg" alt="Memory 2">
+            <div class="memory-number">ARCHIVE 002</div>
+            <h3>Words Worth Keeping</h3>
+            <div class="memory-category">The Conversations</div>
+        </div>
+
+        <div class="memory-card" onclick="openLittleThing(3)">
+            <img src="memory3.jpg" alt="Memory 3">
+            <div class="memory-number">ARCHIVE 003</div>
+            <h3>Late Night Chronicles</h3>
+            <div class="memory-category">The Conversations</div>
+        </div>
+
+        <div class="memory-card" onclick="openLittleThing(4)">
+            <img src="memory4.jpg" alt="Memory 4">
+            <div class="memory-number">ARCHIVE 004</div>
+            <h3>A Message to Remember</h3>
+            <div class="memory-category">The Conversations</div>
+        </div>
+
+
+        <h2 class="memory-collection-heading">
+            II. The Inside Jokes
+        </h2>
+
+        <p class="memory-collection-description">
+            Completely ridiculous. Completely ours.
+        </p>
+
+        <div class="memory-card" onclick="openLittleThing(5)">
+            <img src="memory5.jpg" alt="Memory 5">
+            <div class="memory-number">ARCHIVE 005</div>
+            <h3>Don't Ask Why</h3>
+            <div class="memory-category">The Inside Jokes</div>
+        </div>
+
+        <div class="memory-card" onclick="openLittleThing(6)">
+            <img src="memory6.jpg" alt="Memory 6">
+            <div class="memory-number">ARCHIVE 006</div>
+            <h3>Only We Understand</h3>
+            <div class="memory-category">The Inside Jokes</div>
+        </div>
+
+        <div class="memory-card" onclick="openLittleThing(7)">
+            <img src="memory7.jpg" alt="Memory 7">
+            <div class="memory-number">ARCHIVE 007</div>
+            <h3>Certified Nonsense</h3>
+            <div class="memory-category">The Inside Jokes</div>
+        </div>
+
+
+        <h2 class="memory-collection-heading">
+            III. The Little Gestures
+        </h2>
+
+        <p class="memory-collection-description">
+            Because sometimes the smallest things mean the most.
+        </p>
+
+        <div class="memory-card" onclick="openLittleThing(8)">
+            <img src="memory8.jpg" alt="Memory 8">
+            <div class="memory-number">ARCHIVE 008</div>
+            <h3>A Thoughtful Moment</h3>
+            <div class="memory-category">The Little Gestures</div>
+        </div>
+
+        <div class="memory-card" onclick="openLittleThing(9)">
+            <img src="memory9.jpg" alt="Memory 9">
+            <div class="memory-number">ARCHIVE 009</div>
+            <h3>A Little Bit of Love</h3>
+            <div class="memory-category">The Little Gestures</div>
+        </div>
+
+        <div class="memory-card" onclick="openLittleThing(10)">
+            <img src="memory10.jpg" alt="Memory 10">
+            <div class="memory-number">ARCHIVE 010</div>
+            <h3>Something I'll Never Forget</h3>
+            <div class="memory-category">The Little Gestures</div>
+        </div>
+
+
+        <h2 class="memory-collection-heading">
+            IV. The Unforgettable Bits
+        </h2>
+
+        <p class="memory-collection-description">
+            A few moments that deserve their own little universe.
+        </p>
+
+        <div class="memory-card" onclick="openLittleThing(11)">
+            <img src="memory11.jpg" alt="Memory 11">
+            <div class="memory-number">ARCHIVE 011</div>
+            <h3>One for the Ages</h3>
+            <div class="memory-category">The Unforgettable Bits</div>
+        </div>
+
+        <div class="memory-card" onclick="openLittleThing(12)">
+            <img src="memory12.jpg" alt="Memory 12">
+            <div class="memory-number">ARCHIVE 012</div>
+            <h3>And This One Too</h3>
+            <div class="memory-category">The Unforgettable Bits</div>
+        </div>
+
     </div>
+
+    <p class="exhibit-subtitle">
+        It's the little things, always.
+    </p>
 `,
+    
 
 4: `
     <div class="screen-label">EXHIBIT Nº 04</div>
@@ -1291,6 +1610,112 @@ document.addEventListener("keydown", function(event) {
     }
 });
 </script>
+    
+<div class="little-memory-viewer" id="littleMemoryViewer">
+
+    <button class="little-memory-close"
+            onclick="closeLittleThing()">×</button>
+
+    <div class="little-memory-paper">
+
+        <h2 id="littleMemoryTitle"></h2>
+
+        <img id="littleMemoryImage"
+             src=""
+             alt="Selected memory">
+
+        <p id="littleMemoryCaption"></p>
+
+        <div class="memory-date" id="littleMemoryNumber"></div>
+
+    </div>
+
+</div>
+
+<script>
+const littleMemoryData = [
+    {
+        title: "One Little Conversation",
+        caption: "A conversation that became a memory worth keeping."
+    },
+    {
+        title: "Words Worth Keeping",
+        caption: "Some words stay with us long after they've been said."
+    },
+    {
+        title: "Late Night Chronicles",
+        caption: "The nights when conversations seemed to have no end."
+    },
+    {
+        title: "A Message to Remember",
+        caption: "A little message, a rather big place in my heart."
+    },
+    {
+        title: "Don't Ask Why",
+        caption: "Some things are better left unexplained."
+    },
+    {
+        title: "Only We Understand",
+        caption: "Our own little language in a world full of people."
+    },
+    {
+        title: "Certified Nonsense",
+        caption: "Proof that we can turn absolutely anything into a joke."
+    },
+    {
+        title: "A Thoughtful Moment",
+        caption: "A small gesture that meant more than you might know."
+    },
+    {
+        title: "A Little Bit of Love",
+        caption: "The kind of moment I wish I could keep forever."
+    },
+    {
+        title: "Something I'll Never Forget",
+        caption: "Some memories simply refuse to fade."
+    },
+    {
+        title: "One for the Ages",
+        caption: "A moment that deserves a permanent place in this archive."
+    },
+    {
+        title: "And This One Too",
+        caption: "Because twelve exhibits still aren't enough."
+    }
+];
+
+function openLittleThing(number) {
+
+    const data = littleMemoryData[number - 1];
+
+    document.getElementById("littleMemoryTitle").textContent =
+        data.title;
+
+    document.getElementById("littleMemoryImage").src =
+        "memory" + number + ".jpg";
+
+    document.getElementById("littleMemoryCaption").textContent =
+        data.caption;
+
+    document.getElementById("littleMemoryNumber").textContent =
+        "AARATRIKA ARCHIVES • MEMORY " +
+        String(number).padStart(3, "0");
+
+    document.getElementById("littleMemoryViewer")
+        .classList.add("active");
+}
+
+function closeLittleThing() {
+    document.getElementById("littleMemoryViewer")
+        .classList.remove("active");
+}
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeLittleThing();
+    }
+});
+                          </script>
     
 </body>
 </html>
