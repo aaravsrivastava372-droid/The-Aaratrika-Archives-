@@ -906,6 +906,281 @@ body.transitioning .museum {
         font-size: 22px;
     }
 }
+ 
+/* =====================================
+   EXHIBIT 04 — THE PORTRAIT OF HER
+===================================== */
+
+.portrait-exhibit {
+    max-width: 1050px;
+    margin: 35px auto;
+    padding: 20px;
+}
+
+.portrait-introduction {
+    text-align: center;
+    color: #efd6a5;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 20px auto 45px;
+}
+
+.her-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    align-items: center;
+    margin: 35px auto 55px;
+}
+
+.her-photo {
+    background: linear-gradient(145deg, #f0d9a5, #bd8842);
+    padding: 9px;
+    border: 2px solid #f5d28b;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.45);
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.her-photo:hover {
+    transform: translateY(-8px) rotate(-1deg);
+    box-shadow: 0 12px 35px rgba(239,174,75,0.35);
+}
+
+.her-photo img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    display: block;
+    border: 3px solid #573b22;
+}
+
+.her-photo.featured-her {
+    grid-column: 1 / -1;
+    width: min(620px, 100%);
+    justify-self: center;
+    padding: 13px;
+}
+
+.her-photo.featured-her img {
+    height: 430px;
+}
+
+.her-photo-caption {
+    text-align: center;
+    color: #573b22;
+    font-family: Georgia, serif;
+    margin: 10px 2px 4px;
+    font-size: 14px;
+}
+
+.her-section-title {
+    color: #edc982;
+    font-family: Georgia, serif;
+    text-align: center;
+    font-size: 27px;
+    margin: 55px 0 12px;
+    letter-spacing: 1px;
+}
+
+.her-section-subtitle {
+    color: #d1b991;
+    font-family: Georgia, serif;
+    font-style: italic;
+    text-align: center;
+    margin: 0 auto 28px;
+    line-height: 1.7;
+}
+
+.her-favourites {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 30px auto;
+}
+
+.her-favourite-card {
+    background: linear-gradient(145deg, #f0dfbd, #d6b77e);
+    padding: 22px 14px;
+    text-align: center;
+    border: 2px solid #b88b4c;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.3);
+}
+
+.her-favourite-card .symbol {
+    font-size: 29px;
+    margin-bottom: 9px;
+}
+
+.her-favourite-card h3 {
+    color: #53391f;
+    font-family: Georgia, serif;
+    font-size: 17px;
+    margin: 5px;
+}
+
+.her-favourite-card p {
+    color: #75552f;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 7px 0 0;
+}
+
+.her-personality {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 11px;
+    margin: 25px auto 40px;
+}
+
+.her-trait {
+    border: 1px solid #d8ad65;
+    color: #f0d6a5;
+    border-radius: 30px;
+    padding: 10px 17px;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    background: rgba(206,148,65,0.1);
+}
+
+.her-story {
+    max-width: 760px;
+    margin: 35px auto;
+    padding: 30px;
+    background: linear-gradient(145deg, #f0dfbd, #d9bd88);
+    border: 7px double #a77a3b;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    text-align: center;
+}
+
+.her-story h3 {
+    color: #593d24;
+    font-family: Georgia, serif;
+    font-size: 24px;
+}
+
+.her-story p {
+    color: #674b30;
+    font-family: Georgia, serif;
+    line-height: 1.9;
+    font-size: 16px;
+}
+
+.her-final-inscription {
+    text-align: center;
+    max-width: 800px;
+    margin: 70px auto 35px;
+    padding: 35px 20px;
+    border-top: 1px solid #d5ac69;
+    border-bottom: 1px solid #d5ac69;
+}
+
+.her-final-inscription .lily-decoration {
+    font-size: 34px;
+    margin-bottom: 20px;
+}
+
+.her-final-inscription p {
+    color: #f3dba9;
+    font-family: Georgia, serif;
+    font-size: clamp(22px, 4vw, 34px);
+    font-style: italic;
+    line-height: 1.7;
+}
+
+.her-final-inscription span {
+    color: #d4b47f;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+/* Solo photo viewer */
+
+.her-photo-viewer {
+    position: fixed;
+    inset: 0;
+    z-index: 10002;
+    background: rgba(8, 7, 19, 0.98);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 25px;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.4s;
+}
+
+.her-photo-viewer.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.her-photo-viewer img {
+    max-width: 92%;
+    max-height: 75vh;
+    object-fit: contain;
+    border: 8px solid #d6ad68;
+    box-shadow: 0 0 40px rgba(238,178,83,0.3);
+}
+
+.her-photo-viewer p {
+    color: #f2d9a6;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 18px;
+}
+
+.her-photo-close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    background: transparent;
+    color: #f2d9a6;
+    border: 1px solid #d6ad68;
+    border-radius: 50%;
+    width: 43px;
+    height: 43px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+@media(max-width: 700px) {
+    .her-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 13px;
+    }
+
+    .her-photo img {
+        height: 155px;
+    }
+
+    .her-photo.featured-her {
+        grid-column: 1 / -1;
+    }
+
+    .her-photo.featured-her img {
+        height: 290px;
+    }
+
+    .her-favourites {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .her-story {
+        padding: 20px;
+    }
+
+    .her-section-title {
+        font-size: 23px;
+    }
+    }
     
 </style>
 </head>
@@ -1488,21 +1763,230 @@ const placeholders = {
 `,
     
 
+
 4: `
-    <div class="screen-label">EXHIBIT Nº 04</div>
-    <h1 class="screen-title">The Portrait of Her</h1>
-    <div class="screen-subtitle">An entire exhibit for one person.</div>
-    <div class="gold-line"></div>
-    <div class="placeholder-box">
-        <div class="big-icon">🌹</div>
-        <h3>A Portrait Unlike Any Other</h3>
-        <p>
-            Her little habits, favourite things,
-            quirks, expressions, and all the details
-            that make her who she is.
+    <h1>The Portrait of Her</h1>
+
+    <p class="exhibit-subtitle">
+        An entire universe, contained in one person.
+    </p>
+
+    <div class="portrait-exhibit">
+
+        <p class="portrait-introduction">
+            Some people are difficult to describe.
+            Not because there is little to say,
+            but because there is far too much.
+            This little corner of the universe
+            belongs entirely to one such person.
         </p>
+
+        <h2 class="her-section-title">
+            I. The Portrait
+        </h2>
+
+        <p class="her-section-subtitle">
+            Five little frames. One extraordinary person.
+        </p>
+
+        <div class="her-gallery">
+
+            <div class="her-photo featured-her"
+                 onclick="openHerPhoto(1)">
+                <img src="her1.jpg" alt="Aaratrika portrait">
+                <p class="her-photo-caption">
+                    The centrepiece of this little universe
+                </p>
+            </div>
+
+            <div class="her-photo" onclick="openHerPhoto(2)">
+                <img src="her2.jpg" alt="Aaratrika photograph 2">
+                <p class="her-photo-caption">A little sunshine</p>
+            </div>
+
+            <div class="her-photo" onclick="openHerPhoto(3)">
+                <img src="her3.jpg" alt="Aaratrika photograph 3">
+                <p class="her-photo-caption">A moment in time</p>
+            </div>
+
+            <div class="her-photo" onclick="openHerPhoto(4)">
+                <img src="her4.jpg" alt="Aaratrika photograph 4">
+                <p class="her-photo-caption">Simply her</p>
+            </div>
+
+            <div class="her-photo" onclick="openHerPhoto(5)">
+                <img src="her5.jpg" alt="Aaratrika photograph 5">
+                <p class="her-photo-caption">Another favourite</p>
+            </div>
+
+        </div>
+
+
+        <h2 class="her-section-title">
+            II. Her Little Universe
+        </h2>
+
+        <p class="her-section-subtitle">
+            A few things that make her world her own.
+        </p>
+
+        <div class="her-favourites">
+
+            <div class="her-favourite-card">
+                <div class="symbol">🧡</div>
+                <h3>Her Colour</h3>
+                <p>Orange — warm, bright and unmistakably hers.</p>
+            </div>
+
+            <div class="her-favourite-card">
+                <div class="symbol">🍗</div>
+                <h3>Her Food</h3>
+                <p>Chicken biryani. A very respectable choice.</p>
+            </div>
+
+            <div class="her-favourite-card">
+                <div class="symbol">🎵</div>
+                <h3>Her Song</h3>
+                <p>Aise Kaise Jaane Du</p>
+            </div>
+
+            <div class="her-favourite-card">
+                <div class="symbol">🍊</div>
+                <h3>Her Series</h3>
+                <p>When Life Gives You Tangerines</p>
+            </div>
+
+            <div class="her-favourite-card">
+                <div class="symbol">🤍</div>
+                <h3>Her Flower</h3>
+                <p>Lilies — graceful and beautiful.</p>
+            </div>
+
+            <div class="her-favourite-card">
+                <div class="symbol">🧠</div>
+                <h3>Her Passion</h3>
+                <p>Psychology and helping people through therapy.</p>
+            </div>
+
+        </div>
+
+
+        <h2 class="her-section-title">
+            III. The Person Behind the Portrait
+        </h2>
+
+        <p class="her-section-subtitle">
+            Not a perfect person. A wonderfully complicated one.
+        </p>
+
+        <div class="her-personality">
+            <span class="her-trait">Short-tempered</span>
+            <span class="her-trait">Caring</span>
+            <span class="her-trait">Stubborn</span>
+            <span class="her-trait">Mature</span>
+            <span class="her-trait">Thoughtful</span>
+            <span class="her-trait">Chaotic</span>
+            <span class="her-trait">Comforting</span>
+            <span class="her-trait">A little tsundere</span>
+        </div>
+
+        <div class="her-story">
+
+            <h3>A Mind That Notices</h3>
+
+            <p>
+                She has this little ability to notice when
+                something is wrong just by listening to
+                someone's tone.
+                Sometimes, people don't even need to explain
+                that something is bothering them.
+                She notices.
+            </p>
+
+            <p>
+                And perhaps that's one of the things that
+                makes her interest in psychology so special.
+                She doesn't just want to understand people.
+                She wants to help them.
+            </p>
+
+        </div>
+
+
+        <h2 class="her-section-title">
+            IV. The Moments I Keep
+        </h2>
+
+        <p class="her-section-subtitle">
+            Some memories deserve to be preserved exactly
+            as they happened.
+        </p>
+
+        <div class="her-story">
+
+            <h3>The Goodbye That Wasn't Forever</h3>
+
+            <p>
+                After finally meeting each other in person,
+                there came a moment when it was time to leave.
+            </p>
+
+            <p>
+                I was crying. And she kept hugging me,
+                reassuring me that it was okay,
+                that we'd meet again.
+            </p>
+
+            <p>
+                Perhaps she didn't realise just how much
+                those hugs meant to me.
+                But I remember them.
+            </p>
+
+        </div>
+
+
+        <div class="her-story">
+
+            <h3>Exhibit Notes</h3>
+
+            <p>
+                Known to call the archive's creator
+                "RAND" with remarkable consistency.
+            </p>
+
+            <p>
+                Frequently exhibits uncontrollable laughter.
+                Said laughter is considered one of the
+                curator's favourite sights.
+            </p>
+
+            <p>
+                Warning: subject may become particularly
+                dramatic when exposed to excessive ragebait.
+            </p>
+
+        </div>
+
+
+        <div class="her-final-inscription">
+
+            <div class="lily-decoration">⚜ 🤍 ⚜</div>
+
+            <p>
+                "You've taught me that even if the world
+                is merciless, it's still beautiful."
+            </p>
+
+            <span>
+                A SENTENCE I WILL ALWAYS KEEP
+            </span>
+
+        </div>
+
     </div>
 `,
+    
 
 5: `
     <div class="screen-label">EXHIBIT Nº 05</div>
@@ -1716,6 +2200,54 @@ document.addEventListener("keydown", function(event) {
     }
 });
                           </script>
+    
+<div class="her-photo-viewer" id="herPhotoViewer">
+
+    <button class="her-photo-close"
+            onclick="closeHerPhoto()">×</button>
+
+    <img id="herViewerImage"
+         src=""
+         alt="Aaratrika">
+
+    <p id="herViewerCaption"></p>
+
+</div>
+
+<script>
+const herPhotoCaptions = [
+    "",
+    "The centrepiece of this little universe",
+    "A little sunshine",
+    "A moment in time",
+    "Simply her",
+    "Another favourite"
+];
+
+function openHerPhoto(number) {
+
+    const viewer = document.getElementById("herPhotoViewer");
+
+    document.getElementById("herViewerImage").src =
+        "her" + number + ".jpg";
+
+    document.getElementById("herViewerCaption").textContent =
+        herPhotoCaptions[number];
+
+    viewer.classList.add("active");
+}
+
+function closeHerPhoto() {
+    document.getElementById("herPhotoViewer")
+        .classList.remove("active");
+}
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeHerPhoto();
+    }
+});
+</script>
     
 </body>
 </html>
