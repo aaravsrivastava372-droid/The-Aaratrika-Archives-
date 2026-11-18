@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Letter, Just for You</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0; min-height:100vh; overflow-x:hidden;
+ background:radial-gradient(ellipse at center,#202342,#090b19 75%);
+ color:#f6e9d1; font-family:'Cormorant Garamond',serif;
+ display:flex; justify-content:center; align-items:center;
+ padding:35px 15px;
+}
+.stars{
+ position:fixed; inset:0; pointer-events:none;
+ background-image:
+ radial-gradient(1px 1px at 20% 30%,#fff,transparent),
+ radial-gradient(1px 1px at 70% 20%,#fff,transparent),
+ radial-gradient(2px 2px at 40% 80%,#e8c98c,transparent),
+ radial-gradient(1px 1px at 85% 65%,#fff,transparent),
+ radial-gradient(1px 1px at 10% 90%,#e8c98c,transparent);
+ background-size:250px 250px;
+ opacity:.65;
+}
+.container{width:min(650px,100%);text-align:center;position:relative;z-index:2}
+h1{
+ font-size:clamp(30px,7vw,48px);font-weight:400;
+ letter-spacing:3px;color:#e8c98c;margin-bottom:8px;
+}
+.subtitle{font-style:italic;color:#c9bda9;font-size:19px;margin-bottom:35px}
+.envelope-wrap{perspective:1000px;margin:35px auto}
+.envelope{
+ width:min(330px,85vw);height:210px;margin:auto;
+ position:relative;cursor:pointer;
+ background:#b78b62;border-radius:5px;
+ box-shadow:0 15px 50px #0009;
+ transition:transform .5s;
+}
+.envelope:hover{transform:translateY(-7px)}
+.envelope:before{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(135deg,#d9b58b,#a87853);
+ clip-path:polygon(0 0,50% 55%,100% 0);
+ z-index:2;
+}
+.envelope:after{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(45deg,#9e704f,#d2a77d);
+ clip-path:polygon(0 100%,50% 48%,100% 100%);
+ z-index:3;
+}
+.seal{
+ position:absolute;z-index:4;left:50%;top:53%;
+ transform:translate(-50%,-50%);
+ width:55px;height:55px;border-radius:50%;
+ background:radial-gradient(circle at 35% 30%,#d8a4a0,#843f50 75%);
+ border:2px solid #e6c68d;
+ display:grid;place-items:center;
+ font-size:25px;color:#f7dfc2;
+ box-shadow:0 3px 12px #0007;
+}
+.envelope-label{
+ position:absolute;top:12%;left:0;width:100%;z-index:1;
+ color:#563c30;font-size:20px;font-style:italic;
+}
+.hint{color:#c9bda9;font-style:italic;font-size:17px;margin-top:22px}
+#letter{
+ display:none;text-align:left;
+ background:#f1e4ca;color:#403329;
+ padding:clamp(25px,6vw,48px);
+ border:1px solid #c9a875;
+ box-shadow:0 15px 60px #0009;
+ position:relative;
+ animation:appear .9s ease;
+}
+#letter.open{display:block}
+@keyframes appear{
+ from{opacity:0;transform:translateY(25px)}
+ to{opacity:1;transform:translateY(0)}
+}
+.letter-title{
+ text-align:center;font-size:30px;font-style:italic;
+ color:#91634d;margin-bottom:25px;
+}
+.letter-body{font-size:21px;line-height:1.65;white-space:pre-line}
+.signature{
+ font-family:'Great Vibes',cursive;font-size:42px;
+ text-align:right;color:#8d5260;margin-top:30px;
+}
+.date{text-align:center;font-size:15px;color:#947b64;margin-top:25px;font-style:italic}
+.close{
+ display:block;margin:25px auto 0;background:transparent;
+ border:1px solid #d7bd91;color:#e8d5b5;
+ padding:11px 25px;font-family:inherit;font-size:17px;
+ cursor:pointer;
+}
+.close:hover{background:#ffffff12}
+.petals{position:fixed;top:-30px;pointer-events:none;z-index:5;
+ animation:fall linear forwards;color:#d99ba5;opacity:.8}
+@keyframes fall{
+ to{transform:translateY(110vh) rotate(500deg);opacity:0}
+}
+.back{
+ display:inline-block;margin-top:28px;color:#c9bda9;
+ text-decoration:none;font-size:17px;
+}
+.back:hover{color:#e8c98c}
+</style>
+</head>
+
+<body>
+<div class="stars"></div>
+
+<main class="container">
+ <h1>The Final Exhibit</h1>
+ <div class="subtitle">Some things are too precious to be displayed behind glass.</div>
+
+ <div class="envelope-wrap" id="envelopeWrap" onclick="openLetter()">
+  <div class="envelope">
+   <div class="envelope-label">To Aaratrika, with all my love</div>
+   <div class="seal">♥</div>
+  </div>
+ </div>
+ <div class="hint" id="hint">A little something I saved for you. Tap the seal.</div>
+
+ <article id="letter">
+  <div class="letter-title">To the girl who made my universe a little brighter,</div>
+
+  <div class="letter-body">Happy eighteenth birthday, Aaratrika.
+
+I have spent so much time putting together this little archive, trying to preserve all the moments, conversations, photographs, and tiny details that make our story ours.
+
+And yet, somehow, I still feel like I haven't managed to capture even a fraction of what you mean to me.
+
+You know, sometimes I think about how strange and beautiful our story is. Two little children who once sat in the same classroom, went their separate ways, and somehow found their way back to each other thirteen years later. If someone had told that little boy what was waiting for him, I wonder whether he would've believed it.
+
+I hope you never forget how much you matter. Not just to me, but to everyone whose life you make a little warmer simply by being in it. I hope you keep chasing your ambitions, asking questions, helping people, laughing until you can't breathe, and being unapologetically yourself.
+
+And whenever life gets difficult, I hope you remember that you don't have to have everything figured out. You are allowed to grow, to change your mind, to make mistakes, and to take your time. I'll always be cheering for the person you're becoming.
+
+I don't know what every chapter ahead of us looks like. There will be new places, new beginnings, busy days, and probably plenty of arguments over absolutely ridiculous things.
+
+But I hope there are countless ordinary days too. The kind where nothing extraordinary happens, except that we get to spend them together.
+
+Thank you for being part of my life. Thank you for every laugh, every conversation, every little gesture, and every memory I get to call ours.
+
+If this entire website could communicate just one thing, it would be this:
+
+You are loved. More than this little archive could ever explain.
+
+Happy birthday, my favourite person. Here's to eighteen, and to all the beautiful chapters still waiting to be written.</div>
+
+  <div class="signature">Yours, always.</div>
+  <div class="date">End of the archive. Beginning of everything else.</div>
+ </article>
+
+ <button class="close" id="closeButton" onclick="closeLetter()" style="display:none">Fold the letter away</button>
+
+ <a class="back" href="birthday-hall.html">← Return to the Birthday Hall</a>
+</main>
+
+<script>
+function openLetter(){
+ document.getElementById("letter").classList.add("open");
+ document.getElementById("envelopeWrap").style.display="none";
+ document.getElementById("hint").style.display="none";
+ document.getElementById("closeButton").style.display="block";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function closeLetter(){
+ document.getElementById("letter").classList.remove("open");
+ document.getElementById("envelopeWrap").style.display="block";
+ document.getElementById("hint").style.display="block";
+ document.getElementById("closeButton").style.display="none";
+}
+
+function makePetal(){
+ const p=document.createElement("div");
+ p.className="petals";
+ p.textContent=["✿","❀","❁"][Math.floor(Math.random()*3)];
+ p.style.left=Math.random()*100+"vw";
+ p.style.fontSize=(12+Math.random()*17)+"px";
+ p.style.animationDuration=(6+Math.random()*7)+"s";
+ document.body.appendChild(p);
+ setTimeout(()=>p.remove(),14000);
+}
+setInterval(makePetal,650);
+</script>
+</body>
+</html>
