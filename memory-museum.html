@@ -1093,21 +1093,65 @@ const firstEncounter = `
 
 const placeholders = {
 
+
 2: `
-    <div class="screen-label">EXHIBIT Nº 02</div>
-    <h1 class="screen-title">The Photograph Gallery</h1>
-    <div class="screen-subtitle">A thousand moments, frozen in time.</div>
-    <div class="gold-line"></div>
-    <div class="placeholder-box">
-        <div class="big-icon">📷</div>
-        <h3>A Gallery Waiting to Be Filled</h3>
-        <p>
-            Every photograph has a story.
-            This room is waiting for the moments
-            you want to preserve here.
-        </p>
+    <h1>The Photograph Gallery</h1>
+
+    <p class="exhibit-subtitle">
+        Little moments, forever framed.
+    </p>
+
+    <div class="photo-gallery">
+
+        <div class="photo-card featured"
+             onclick="openPhoto(1)">
+            <img src="photo1.jpg" alt="Our photograph 1">
+            <p>The One I'd Frame Forever</p>
+        </div>
+
+        <div class="photo-card" onclick="openPhoto(2)">
+            <img src="photo2.jpg" alt="Our photograph 2">
+            <p>A Little Moment</p>
+        </div>
+
+        <div class="photo-card" onclick="openPhoto(3)">
+            <img src="photo3.jpg" alt="Our photograph 3">
+            <p>Two Silly Souls</p>
+        </div>
+
+        <div class="photo-card" onclick="openPhoto(4)">
+            <img src="photo4.jpg" alt="Our photograph 4">
+            <p>One for the Memories</p>
+        </div>
+
+        <div class="photo-card" onclick="openPhoto(5)">
+            <img src="photo5.jpg" alt="Our photograph 5">
+            <p>Somewhere in Time</p>
+        </div>
+
+        <div class="photo-card" onclick="openPhoto(6)">
+            <img src="photo6.jpg" alt="Our photograph 6">
+            <p>My Favourite View</p>
+        </div>
+
+        <div class="photo-card" onclick="openPhoto(7)">
+            <img src="photo7.jpg" alt="Our photograph 7">
+            <p>A Thousand Little Things</p>
+        </div>
+
+        <div class="photo-card" onclick="openPhoto(8)">
+            <img src="photo8.jpg" alt="Our photograph 8">
+            <p>And Still, More to Come</p>
+        </div>
+
     </div>
+
+    <p class="exhibit-subtitle">
+        Some moments deserve more than a place in memory.
+        They deserve a frame.
+    </p>
 `,
+    
 
 3: `
     <div class="screen-label">EXHIBIT Nº 03</div>
@@ -1207,5 +1251,46 @@ document.addEventListener("keydown", function(event) {
 
 </script>
 
+<div class="photo-viewer" id="photoViewer">
+    <button class="photo-close" onclick="closePhoto()">×</button>
+    <img id="viewerImage" src="" alt="Selected photograph">
+    <p id="viewerCaption"></p>
+</div>
+
+<script>
+const photoCaptions = [
+    "",
+    "The One I'd Frame Forever",
+    "A Little Moment",
+    "Two Silly Souls",
+    "One for the Memories",
+    "Somewhere in Time",
+    "My Favourite View",
+    "A Thousand Little Things",
+    "And Still, More to Come"
+];
+
+function openPhoto(number) {
+    const viewer = document.getElementById("photoViewer");
+    const image = document.getElementById("viewerImage");
+    const caption = document.getElementById("viewerCaption");
+
+    image.src = "photo" + number + ".jpg";
+    caption.textContent = photoCaptions[number];
+
+    viewer.classList.add("active");
+}
+
+function closePhoto() {
+    document.getElementById("photoViewer").classList.remove("active");
+}
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closePhoto();
+    }
+});
+</script>
+    
 </body>
 </html>
