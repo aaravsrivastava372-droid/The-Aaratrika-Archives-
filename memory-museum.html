@@ -2721,9 +2721,63 @@ document.addEventListener("keydown", function(event) {
 
 <script>
 function toggleFutureChapter(number) {
-    const selected = document.getElementById(
-        "futureReveal" + number
-    );
+    const selected = document.getElementById("futureReveal" + number);
+
+    if (!selected) return;
+
+    const allChapters = document.querySelectorAll(".future-reveal");
+
+    allChapters.forEach(function(chapter) {
+        if (chapter !== selected) {
+            chapter.classList.remove("visible");
+        }
+    });
+
+    selected.classList.toggle("visible");
+}
+
+function openFutureLetter() {
+    const overlay = document.getElementById("futureLetterOverlay");
+
+    if (!overlay) return;
+
+    overlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+}
+
+function closeFutureLetter() {
+    const overlay = document.getElementById("futureLetterOverlay");
+
+    if (!overlay) return;
+
+    overlay.classList.remove("open");
+    document.body.style.overflow = "";
+}
+
+document.addEventListener("click", function(event) {
+    const chapter = event.target.closest("[data-future-chapter]");
+    const envelope = event.target.closest("[data-future-letter]");
+    const closeButton = event.target.closest("[data-close-future-letter]");
+
+    if (chapter) {
+        toggleFutureChapter(Number(chapter.dataset.futureChapter));
+    }
+
+    if (envelope) {
+        openFutureLetter();
+    }
+
+    if (closeButton) {
+        closeFutureLetter();
+    }
+});
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeFutureLetter();
+    }
+});
+    
 
     const wasVisible = selected.classList.contains("visible");
 
@@ -2736,22 +2790,6 @@ function toggleFutureChapter(number) {
     if (!wasVisible) {
         selected.classList.add("visible");
     }
-}
-
-function openFutureLetter() {
-    document.getElementById(
-        "futureLetterOverlay"
-    ).classList.add("open");
-
-    document.body.style.overflow = "hidden";
-}
-
-function closeFutureLetter() {
-    document.getElementById(
-        "futureLetterOverlay"
-    ).classList.remove("open");
-
-    document.body.style.overflow = "";
 }
 
 document.addEventListener("keydown", function(event) {
