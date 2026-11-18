@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Time Capsule</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at top, #30304b, #111525 65%, #080d18);
+    color: #f4e5ca;
+    font-family: Georgia, serif;
+}
+
+header {
+    text-align: center;
+    padding: 55px 20px 30px;
+}
+
+.eyebrow {
+    color: #d6b779;
+    font: 11px Arial;
+    letter-spacing: 4px;
+}
+
+h1 {
+    font-size: clamp(32px, 8vw, 48px);
+    color: #edce95;
+    font-weight: normal;
+    margin: 18px 0;
+}
+
+.subtitle {
+    color: #d5c4a7;
+    font-style: italic;
+    line-height: 1.8;
+}
+
+.envelopes {
+    width: min(650px, 90%);
+    margin: 30px auto 60px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.envelope-card {
+    min-height: 190px;
+    border: 1px solid #b99a6266;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #30334b, #171d30);
+    color: #f1d49e;
+    padding: 22px 12px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.envelope-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px #d7b77933;
+}
+
+.envelope-card .symbol {
+    display: block;
+    font-size: 37px;
+    margin-bottom: 14px;
+}
+
+.envelope-card h3 {
+    font-size: 17px;
+    font-weight: normal;
+}
+
+.envelope-card p {
+    color: #cbb995;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background: #060a16ed;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay.show {
+    display: flex;
+    animation: fade .4s ease;
+}
+
+.paper {
+    width: min(500px, 100%);
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 32px 25px;
+    background: linear-gradient(145deg, #f4e8d1, #ddc7a0);
+    color: #493a2b;
+    border: 5px double #a8895b;
+    text-align: center;
+    animation: rise .4s ease;
+}
+
+.paper h2 {
+    color: #76543a;
+    font-size: 24px;
+    font-weight: normal;
+}
+
+.paper p {
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.close {
+    margin-top: 20px;
+    padding: 10px 22px;
+    background: transparent;
+    border: 1px solid #92734e;
+    color: #604a32;
+    cursor: pointer;
+    font-family: Georgia, serif;
+}
+
+.photo-placeholder {
+    margin: 25px auto;
+    min-height: 190px;
+    border: 2px dashed #a8895b;
+    display: grid;
+    place-items: center;
+    color: #806547;
+    padding: 20px;
+    font-style: italic;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 20px 50px;
+    color: #cbb995;
+    font-style: italic;
+}
+
+@keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes rise {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media(max-width: 430px) {
+    .envelopes { gap: 12px; }
+    .envelope-card { min-height: 170px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="eyebrow">THE AARATRIKA ARCHIVES · EXHIBIT V</div>
+    <h1>The Time Capsule</h1>
+    <p class="subtitle">
+        A little something for the Aaratrika of tomorrow.<br>
+        Four little envelopes. Four little pieces of tomorrow.
+    </p>
+</header>
+
+<div class="envelopes">
+
+    <button class="envelope-card" onclick="openCapsule(0)">
+        <span class="symbol">✉️</span>
+        <h3>For Your Future Self</h3>
+        <p>A letter from the boy who made this little archive.</p>
+    </button>
+
+    <button class="envelope-card" onclick="openCapsule(1)">
+        <span class="symbol">🔮</span>
+        <h3>Predictions</h3>
+        <p>Some highly scientific predictions about you.</p>
+    </button>
+
+    <button class="envelope-card" onclick="openCapsule(2)">
+        <span class="symbol">🌷</span>
+        <h3>Promises</h3>
+        <p>Little things I hope we'll get to experience.</p>
+    </button>
+
+    <button class="envelope-card" onclick="openCapsule(3)">
+        <span class="symbol">📷</span>
+        <h3>A Future Photograph</h3>
+        <p>A space for a memory that hasn't happened yet.</p>
+    </button>
+
+</div>
+
+<div class="overlay" id="capsuleOverlay">
+    <div class="paper">
+        <div id="capsuleContent"></div>
+        <button class="close" onclick="closeCapsule()">
+            Seal this envelope
+        </button>
+    </div>
+</div>
+
+<footer>
+    Some things are worth waiting for.<br>
+    Especially the memories we haven't made yet.
+</footer>
+
+<script>
+const capsules = [
+
+`
+<h2>Dear Future Aaratrika,</h2>
+<p>
+If you're reading this, I hope life has been kind to you.
+I hope you've achieved things you once only dreamed about.
+I hope you're still curious, still ambitious, still laughing
+at the most ridiculous things.
+</p>
+<p>
+I wonder how much has changed since this little birthday
+archive was made. Whatever the answer, I hope you never
+forget how special you were to someone even then.
+</p>
+<p>
+And if things have been difficult, I hope you remember
+that you deserve kindness, especially from yourself.
+</p>
+<p><i>With all the affection this little archive can hold.</i></p>
+`,
+
+`
+<h2>Official Predictions 🔮</h2>
+<p>1. You'll continue to win arguments even when nobody knows how they started.</p>
+<p>2. You'll diagnose someone's mood from a single change in their voice.</p>
+<p>3. Aunty's garlic bread will remain an important part of history.</p>
+<p>4. You'll achieve something incredible and then act like it was no big deal.</p>
+<p>5. You'll still call a certain someone RAND.</p>
+<p>6. You'll keep being wonderfully, unapologetically you.</p>
+`,
+
+`
+<h2>Things I Hope We Get To Do</h2>
+<p>🌸 Explore Japan together.</p>
+<p>🎓 Experience the college chapter, wherever life takes us.</p>
+<p>🌙 Make countless ordinary days extraordinary.</p>
+<p>📸 Take photographs of places we'll want to remember.</p>
+<p>🍜 Try new food and argue over what tastes better.</p>
+<p>💌 Keep finding new reasons to celebrate each other.</p>
+`,
+
+`
+<h2>Reserved for Tomorrow</h2>
+<p>
+This space is intentionally empty.
+</p>
+<div class="photo-placeholder">
+    Our next photograph belongs here.<br>
+    Somewhere in a future we haven't reached yet. ✨
+</div>
+<p>
+One day, we'll have another memory to add to the archives.
+</p>
+`
+
+];
+
+function openCapsule(index) {
+    document.getElementById("capsuleContent").innerHTML = capsules[index];
+    document.getElementById("capsuleOverlay").classList.add("show");
+    document.body.style.overflow = "hidden";
+}
+
+function closeCapsule() {
+    document.getElementById("capsuleOverlay").classList.remove("show");
+    document.body.style.overflow = "";
+}
+
+document.getElementById("capsuleOverlay").addEventListener("click", function(event) {
+    if (event.target === this) closeCapsule();
+});
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") closeCapsule();
+});
+</script>
+
+</body>
+</html>
